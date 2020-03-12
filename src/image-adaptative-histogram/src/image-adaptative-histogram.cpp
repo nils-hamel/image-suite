@@ -1,5 +1,28 @@
+/*
+ *  image-suite - vision
+ *
+ *      Nils Hamel - nils.hamel@bluewin.ch
+ *      Copyright (c) 2016-2020 DHLAB, EPFL
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
     # include "image-adaptative-histogram.hpp"
+
+/*
+    source - adaptative histogram computation
+ */
 
     void image_adaptative_histogram_kernel( cv::Mat & im_src, cv::Mat & im_msk, cv::Mat & im_mean, cv::Mat & im_std, std::vector<int> & im_channels, int const im_kernel, int const im_px, int const im_py ) {
 
@@ -111,7 +134,11 @@
 
     }
 
-    void image_adaptative_histogram_apply( cv::Mat & im_src, cv::Mat & im_msk, cv::Mat & im_mean, cv::Mat & im_std, std::vector<int> & im_channels ) {
+/*
+    source - adaptative histogram application
+ */
+
+    void image_adaptative_histogram_apply( cv::Mat & im_src, cv::Mat & im_msk, cv::Mat & im_mean, cv::Mat & im_std, std::vector<int> & im_channels, double const im_target_mean, double const im_target_std ) {
 
         /* computation variable */
         float im_component( 0. );
@@ -129,7 +156,7 @@
                     if ( im_msk.at<uchar>(im_y, im_x) > 127.5 ) {
 
                         /* compute corrected component */
-                        im_component = ( im_src.at<cv::Vec3b>(im_y, im_x)[im_channels[im_c]] - im_mean.at<float>(im_y, im_x) ) / im_std.at<float>(im_y, im_x) * 64.0 + 127.5;
+                        im_component = ( im_src.at<cv::Vec3b>(im_y, im_x)[im_channels[im_c]] - im_mean.at<float>(im_y, im_x) ) / im_std.at<float>(im_y, im_x) * im_target_std + im_target_mean;
 
                         /* clamp value */
                         im_component = ( im_component <   0. ) ?   0. : im_component;
@@ -153,15 +180,26 @@
 
     }
 
+/*
+    source - main function
+ */
+
     int main( int argc, char ** argv ) {
 
         /* reduction factor */
-        double im_reduce( 1. / 8. );
+        double im_reduce( lc_read_double( argc, argv, "--reduce", "-r",  1. ) );
 
         /* kernel size */
-        double im_kernel( 0.065 );
+        double im_kernel( lc_read_double( argc, argv, "--kernel", "-k", 0.065 ) );
 
-        bool im_linked( true );
+        /* color component linkage */
+        bool im_linked( lc_read_flag( argc, argv, "--linked", "-l" ) );
+
+        /* statistical quantities */
+        double im_target_mean( lc_read_double( argc, argv, "--mean", "-n", 127.5 ) );
+
+        /* statisitcal quantities */
+        double im_target_std( lc_read_double( argc, argv, "--std", "-d", 64. ) );
 
         /* importation image */
         cv::Mat im_src, im_rsrc;
@@ -179,7 +217,7 @@
     {
 
         /* import source image */
-        im_src = cv::imread( argv[1], CV_LOAD_IMAGE_UNCHANGED );
+        im_src = cv::imread( lc_read_string( argc, argv, "--source", "-s" ), CV_LOAD_IMAGE_UNCHANGED );
 
         /* check image importation */
         if ( im_src.empty() ) {
@@ -198,7 +236,7 @@
         }
 
         /* import mask image */
-        im_msk = cv::imread( argv[2], CV_LOAD_IMAGE_GRAYSCALE );
+        im_msk = cv::imread( lc_read_string( argc, argv, "--mask", "-m" ), CV_LOAD_IMAGE_GRAYSCALE );
 
         /* check image importation */
         if ( im_msk.empty() ) {
@@ -246,7 +284,7 @@
                 cv::resize( im_rstd, im_std, cv::Size( im_src.cols, im_src.rows ), 0, 0, cv::INTER_CUBIC );
 
                 /* apply historgam correction */
-                image_adaptative_histogram_apply( im_src, im_msk, im_mean, im_std, im_channels );
+                image_adaptative_histogram_apply( im_src, im_msk, im_mean, im_std, im_channels, im_target_mean, im_target_std );
 
             } else {
 
@@ -269,7 +307,7 @@
                     cv::resize( im_rstd, im_std, cv::Size( im_src.cols, im_src.rows ), 0, 0, cv::INTER_CUBIC );
 
                     /* apply historgam correction */
-                    image_adaptative_histogram_apply( im_src, im_msk, im_mean, im_std, im_channels );
+                    image_adaptative_histogram_apply( im_src, im_msk, im_mean, im_std, im_channels, im_target_mean, im_target_std );
 
                 }
 
@@ -278,7 +316,7 @@
         }
 
         /* export image */
-        cv::imwrite( argv[3], im_src );
+        cv::imwrite( lc_read_string( argc, argv, "--export", "-e" ), im_src );
         
     }
     catch( std::runtime_error & im_error)
