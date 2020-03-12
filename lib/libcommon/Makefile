@@ -3,9 +3,9 @@
 #
 
     # c/cpp, suite-base/suite/library #
-    MAKE_NAME:=image-suite
-    MAKE_LANG:=c
-    MAKE_TYPE:=suite-base
+    MAKE_NAME:=libcommon
+    MAKE_LANG:=cpp
+    MAKE_TYPE:=libcommon
 
     MAKE_DBIN:=bin
     MAKE_DDOC:=doc
@@ -20,7 +20,7 @@
     MAKE_CRMD:=rm -rf
     MAKE_CFCP:=cp
 
-    MAKE_CCMP:=gcc
+    MAKE_CCMP:=g++
 ifeq ($(MAKE_OSYS),Linux)
     MAKE_CLNK:=gcc-ar rcs
 else
@@ -30,8 +30,8 @@ endif
 endif
     MAKE_CDOC:=doxygen
 
-    MAKE_FCMP:=
-    MAKE_FLNK:=
+    MAKE_FCMP:=-std=c++11 -O3 -Wall -Wno-deprecated -funsigned-char -flto
+    MAKE_FLNK:=-flto
 
 #
 #   makefile - configuration

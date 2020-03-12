@@ -156,7 +156,7 @@
     int main( int argc, char ** argv ) {
 
         /* reduction factor */
-        double im_reduce( 1.0 );
+        double im_reduce( 1. / 8. );
 
         /* kernel size */
         double im_kernel( 0.065 );
@@ -205,6 +205,14 @@
 
             /* send message */
             throw std::runtime_error( "Mask image not found" );
+
+        }
+
+        /* check consistency of mask image */
+        if ( ( im_src.cols != im_msk.cols ) || ( im_src.rows != im_msk.rows ) ) {
+
+            /* send message */
+            throw std::runtime_error( "Inconsistent mask size according to source image" );
 
         }
 
