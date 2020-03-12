@@ -143,17 +143,17 @@
         /* computation variable */
         float im_component( 0. );
 
-        /* parsing channels */
-        for ( unsigned int im_c(0); im_c < im_channels.size(); im_c ++ ) {
+        /* parsing source image */
+        for ( int im_x(0); im_x < im_src.cols; im_x ++ ) {
 
             /* parsing source image */
-            for ( int im_x(0); im_x < im_src.cols; im_x ++ ) {
+            for ( int im_y(0); im_y < im_src.rows; im_y ++ ) {
 
-                /* parsing source image */
-                for ( int im_y(0); im_y < im_src.rows; im_y ++ ) {
+                /* check mask condition */
+                if ( im_msk.at<uchar>(im_y, im_x) > 127.5 ) {
 
-                    /* check mask condition */
-                    if ( im_msk.at<uchar>(im_y, im_x) > 127.5 ) {
+                    /* parsing channels */
+                    for ( unsigned int im_c(0); im_c < im_channels.size(); im_c ++ ) {
 
                         /* compute corrected component */
                         im_component = ( im_src.at<cv::Vec3b>(im_y, im_x)[im_channels[im_c]] - im_mean.at<float>(im_y, im_x) ) / im_std.at<float>(im_y, im_x) * im_target_std + im_target_mean;
@@ -165,7 +165,12 @@
                         /* assign corrected value */
                         im_src.at<cv::Vec3b>(im_y, im_x)[im_channels[im_c]] = im_component;
 
-                    } else {
+                    }
+
+                } else {
+
+                    /* parsing channels */
+                    for ( unsigned int im_c(0); im_c < im_channels.size(); im_c ++ ) {
 
                         /* assign null value */
                         im_src.at<cv::Vec3b>(im_y, im_x)[im_channels[im_c]] = 0;
@@ -198,7 +203,7 @@
         /* statistical quantities */
         double im_target_mean( lc_read_double( argc, argv, "--mean", "-n", 127.5 ) );
 
-        /* statisitcal quantities */
+        /* statistical quantities */
         double im_target_std( lc_read_double( argc, argv, "--std", "-d", 64. ) );
 
         /* importation image */
@@ -212,6 +217,9 @@
 
         /* std value image */
         cv::Mat im_std, im_rstd;
+
+        /* mask file path */
+        char * im_mask_path( lc_read_string( argc, argv, "--mask", "-m" ) );
 
     try
     {
@@ -235,22 +243,32 @@
 
         }
 
-        /* import mask image */
-        im_msk = cv::imread( lc_read_string( argc, argv, "--mask", "-m" ), CV_LOAD_IMAGE_GRAYSCALE );
+        /* check mask image path */
+        if ( im_mask_path == NULL ) {
 
-        /* check image importation */
-        if ( im_msk.empty() ) {
+            /* create empty mask */
+            im_msk = cv::Mat::ones( cv::Size( im_src.cols, im_src.rows ), CV_8UC1 ) * 255.;
 
-            /* send message */
-            throw std::runtime_error( "Mask image not found" );
+        } else {
 
-        }
+            /* import mask image */
+            im_msk = cv::imread( lc_read_string( argc, argv, "--mask", "-m" ), CV_LOAD_IMAGE_GRAYSCALE );
 
-        /* check consistency of mask image */
-        if ( ( im_src.cols != im_msk.cols ) || ( im_src.rows != im_msk.rows ) ) {
+            /* check image importation */
+            if ( im_msk.empty() ) {
 
-            /* send message */
-            throw std::runtime_error( "Inconsistent mask size according to source image" );
+                /* send message */
+                throw std::runtime_error( "Mask image not found" );
+
+            }
+
+            /* check consistency of mask image */
+            if ( ( im_src.cols != im_msk.cols ) || ( im_src.rows != im_msk.rows ) ) {
+
+                /* send message */
+                throw std::runtime_error( "Inconsistent mask size according to source image" );
+
+            }
 
         }
 
@@ -283,7 +301,7 @@
                 /* resize standard deviation map to source image size */
                 cv::resize( im_rstd, im_std, cv::Size( im_src.cols, im_src.rows ), 0, 0, cv::INTER_CUBIC );
 
-                /* apply historgam correction */
+                /* apply histogram correction */
                 image_adaptative_histogram_apply( im_src, im_msk, im_mean, im_std, im_channels, im_target_mean, im_target_std );
 
             } else {
@@ -306,7 +324,7 @@
                     /* resize standard deviation map to source image size */
                     cv::resize( im_rstd, im_std, cv::Size( im_src.cols, im_src.rows ), 0, 0, cv::INTER_CUBIC );
 
-                    /* apply historgam correction */
+                    /* apply histogram correction */
                     image_adaptative_histogram_apply( im_src, im_msk, im_mean, im_std, im_channels, im_target_mean, im_target_std );
 
                 }
