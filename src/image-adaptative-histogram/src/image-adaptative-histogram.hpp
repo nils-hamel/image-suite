@@ -119,9 +119,8 @@
      *  This function is a front-end for the computation of each pixel of the
      *  source image local histogram. The source image is assumed to be reduced
      *  in size. The mask is expected to have the same size of the provided
-     *  source image. The mask is used to ignore pixel of the source image that
-     *  have a value below 127.5 in the corresponding position of the mask
-     *  image.
+     *  source image. The mask is broadcasted to the subsequent process that
+     *  performs the statistical quantities computation.
      *
      *  This function simply parses the source image pixels and invokes the
      *  computation of the local histogram.
