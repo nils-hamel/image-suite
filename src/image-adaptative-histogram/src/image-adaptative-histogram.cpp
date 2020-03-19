@@ -72,6 +72,14 @@
 
         }
 
+        /* check count value */
+        if ( im_count == 0 ) {
+
+            /* abort computation */
+            return;
+
+        }
+
         /* compute mean value */
         im_mean.at<float>(im_py, im_px) /= float( im_count );
 
@@ -120,13 +128,8 @@
             /* parsing source image pixels */
             for ( int im_y(0); im_y < im_src.rows; im_y ++ ) {
 
-                /* check mask condition */
-                if ( im_msk.at<uchar>(im_y, im_x) > 127.5 ) {
-
-                    /* compute mean and standard deviation for current pixel */
-                    image_adaptative_histogram_kernel( im_src, im_msk, im_mean, im_std, im_channels, im_kernel, im_x, im_y );
-
-                }
+                /* compute mean and standard deviation for current pixel */
+                image_adaptative_histogram_kernel( im_src, im_msk, im_mean, im_std, im_channels, im_kernel, im_x, im_y );
 
             }
 
