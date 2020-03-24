@@ -1,5 +1,5 @@
 /*
- *  image-suite - vision
+ *  image-suite - adaptative histogram
  *
  *      Nils Hamel - nils.hamel@bluewin.ch
  *      Copyright (c) 2016-2020 DHLAB, EPFL

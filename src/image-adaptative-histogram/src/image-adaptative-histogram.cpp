@@ -1,5 +1,5 @@
 /*
- *  image-suite - vision
+ *  image-suite - adaptative histogram
  *
  *      Nils Hamel - nils.hamel@bluewin.ch
  *      Copyright (c) 2016-2020 DHLAB, EPFL
@@ -228,7 +228,7 @@
     {
 
         /* import source image */
-        im_src = cv::imread( lc_read_string( argc, argv, "--source", "-s" ), CV_LOAD_IMAGE_UNCHANGED );
+        im_src = cv::imread( lc_read_string( argc, argv, "--source", "-s" ), cv::IMREAD_UNCHANGED );
 
         /* check image importation */
         if ( im_src.empty() ) {
@@ -255,7 +255,7 @@
         } else {
 
             /* import mask image */
-            im_msk = cv::imread( lc_read_string( argc, argv, "--mask", "-m" ), CV_LOAD_IMAGE_GRAYSCALE );
+            im_msk = cv::imread( lc_read_string( argc, argv, "--mask", "-m" ), cv::IMREAD_GRAYSCALE );
 
             /* check image importation */
             if ( im_msk.empty() ) {

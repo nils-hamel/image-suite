@@ -3,7 +3,7 @@
 #
 
     # c/cpp, suite-base/suite/library #
-    MAKE_NAME:=image-adaptative-histogram
+    MAKE_NAME:=image-farneback-optical-flow
     MAKE_LANG:=cpp
     MAKE_TYPE:=suite
 
@@ -31,7 +31,7 @@ endif
     MAKE_CDOC:=doxygen
 
     MAKE_FCMP:=-std=c++11 -O3 -Wall -Wno-deprecated -fno-strict-aliasing -funsigned-char -pedantic -D _DEFAULT_SOURCE -U _FORTIFY_SOURCE -D _FORTIFY_SOURCE=0 -I/usr/local/include/opencv4 -flto
-    MAKE_FLNK:=-lm -L/usr/local/lib -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_imgcodecs -flto
+    MAKE_FLNK:=-lm -L/usr/local/lib -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_imgcodecs -lopencv_video -flto
 
 #
 #   makefile - configuration
