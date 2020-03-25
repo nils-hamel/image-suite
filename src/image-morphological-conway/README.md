@@ -40,7 +40,40 @@ The following image shows the results obtained used _f=0.5_ and with a varying n
 &nbsp;
 <img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.5_4.png?raw=true" width="384">
 <br />
-<i>Process result with a reduction factor of 0.5 and 3 iteration on the left and 4 on the right</i>
+<i>Process result with a reduction factor of 0.5 and 3 iterations on the left and 4 on the right</i>
 </p>
 <br />
 
+One can see how the increase of the number of scale allows to fill a greater area. This number of scale has to be adapted to the scattering of the pixel as the more scattered they are, the greater the number of scale has to be.
+
+One can also see how the strong reduction factor of _0.5_ creates sharp and squared area edges. A balance has then to be found between the _quality_ of the edges and the _filling power_. In order to keep filling capacity while obtaining smoother edges, one can also play with the factor value.
+
+Increasing the factor value from _0.5_ to _0.75_ allows to obtain smoother edges but requires more number of scale to obtain the _same_ filling capacity. One can use the following approximation of compute the new number of scale in case of a factor modification :
+
+    scale' = log( factor ^ scale ) / log( factor' )
+
+For example, obtaining the same filling capacity of _(r=3, f=0.5)_ with _f'=0.75_, one can use :
+
+    scale' = log( 0.5 ^ 3 ) / log( 0.75 ) = 7.2283 ~ 7
+
+scales. The following images gives the results obtained with _f=0.75_ and a number of iteration computed with the previous relation :
+
+<br />
+<p align="center">
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.75_2.png?raw=true" width="384">
+&nbsp;
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.75_5.png?raw=true" width="384">
+<br />
+<i>Process result with a reduction factor of 0.75 and 2 iterations on the left and 5 on the right</i>
+</p>
+<br />
+
+<br />
+<p align="center">
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.75_7.png?raw=true" width="384">
+&nbsp;
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.75_10.png?raw=true" width="384">
+<br />
+<i>Process result with a reduction factor of 0.75 and 7 iterations on the left and 10 on the right</i>
+</p>
+<br />
