@@ -21,7 +21,7 @@
     # include "image-morphological-conway.hpp"
 
 /*
-    source - conway game variation
+    source - Conway game variation
  */
 
     void im_morphological_conway( cv::Mat & im_image ) {
@@ -108,7 +108,7 @@
 
     void im_morphological_conway_maxpool( cv::Mat & im_source, cv::Mat & im_reducted, double const im_factor ) {
 
-        /* allocate image */
+        /* allocate reduced image */
         im_reducted = cv::Mat::zeros( cv::Size( int(im_source.cols * im_factor), int(im_source.rows * im_factor) ), CV_8UC1 );
 
         /* parsing source image */
@@ -117,10 +117,10 @@
             /* parsing source image */
             for ( int im_y(0); im_y < im_source.rows; im_y ++ ) {
 
-                /* check pixel value */
+                /* check source image pixel value */
                 if ( im_source.at<uchar>(im_y, im_x) == 255 ) {
 
-                    /* assign pixels on reduce image */
+                    /* assign pixels on reduced image */
                     im_reducted.at<uchar>(int(im_y * im_factor), int(im_x * im_factor)) = 255;
 
                 }
@@ -185,7 +185,7 @@
 
             }
 
-            /* apply variation of conway game */
+            /* apply variation of Conway game */
             im_morphological_conway( im_reducted );
 
             /* upscale correction grid */
