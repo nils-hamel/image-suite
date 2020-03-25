@@ -157,6 +157,10 @@
      *  is required to fill the desired area. If the number of scale is too low,
      *  the image can be left unchanged or nearly unchanged.
      *
+     *  For the sake of simplicity, for each scale, the implemented Conway game
+     *  variation discards cell at the edge of the raster. This allows not to
+     *  implemented specific rules for the edge and corner cells.
+     *
      *  \param argc Standard parameter
      *  \param argv Standard parameter
      *
