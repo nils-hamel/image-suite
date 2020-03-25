@@ -10,7 +10,7 @@ To illustrate the tools result, the following example image is considered :
 
 <br />
 <p align="center">
-<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/example.png?raw=true" width="384">
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/example.png?raw=true" width="320">
 <br />
 <i>Original source raster contained scattered white pixels</i>
 </p>
@@ -26,9 +26,9 @@ The following image shows the results obtained used _f=0.5_ and with a varying n
 
 <br />
 <p align="center">
-<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.5_1.png?raw=true" width="384">
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.5_1.png?raw=true" width="320">
 &nbsp;
-<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.5_2.png?raw=true" width="384">
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.5_2.png?raw=true" width="320">
 <br />
 <i>Process result with a reduction factor of 0.5 and 1 iteration on the left and 2 on the right</i>
 </p>
@@ -36,9 +36,9 @@ The following image shows the results obtained used _f=0.5_ and with a varying n
 
 <br />
 <p align="center">
-<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.5_3.png?raw=true" width="384">
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.5_3.png?raw=true" width="320">
 &nbsp;
-<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.5_4.png?raw=true" width="384">
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.5_4.png?raw=true" width="320">
 <br />
 <i>Process result with a reduction factor of 0.5 and 3 iterations on the left and 4 on the right</i>
 </p>
@@ -56,13 +56,15 @@ For example, obtaining the same filling capacity of _(r=3, f=0.5)_ with _f'=0.75
 
     scale' = log( 0.5 ^ 3 ) / log( 0.75 ) = 7.2283 ~ 7
 
-scales. The following images gives the results obtained with _f=0.75_ and a number of iteration computed with the previous relation :
+as the number of scales.
+
+The following images gives the results obtained with _f=0.75_ and a number of iterations computed with the previous relation :
 
 <br />
 <p align="center">
-<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.75_2.png?raw=true" width="384">
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.75_2.png?raw=true" width="320">
 &nbsp;
-<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.75_5.png?raw=true" width="384">
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.75_5.png?raw=true" width="320">
 <br />
 <i>Process result with a reduction factor of 0.75 and 2 iterations on the left and 5 on the right</i>
 </p>
@@ -70,10 +72,36 @@ scales. The following images gives the results obtained with _f=0.75_ and a numb
 
 <br />
 <p align="center">
-<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.75_7.png?raw=true" width="384">
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.75_7.png?raw=true" width="320">
 &nbsp;
-<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.75_10.png?raw=true" width="384">
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.75_10.png?raw=true" width="320">
 <br />
 <i>Process result with a reduction factor of 0.75 and 7 iterations on the left and 10 on the right</i>
 </p>
 <br />
+
+One can see how the filling capacity can be kept while obtained smoother edge on the filled area.
+
+The following images show the results obtained with _f=0.875_ and a number of iterations also computed with the previous relation :
+
+<br />
+<p align="center">
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.875_5.png?raw=true" width="320">
+&nbsp;
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.875_10.png?raw=true" width="320">
+<br />
+<i>Process result with a reduction factor of 0.875 and 5 iterations on the left and 10 on the right</i>
+</p>
+<br />
+
+<br />
+<p align="center">
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.875_16.png?raw=true" width="320">
+&nbsp;
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.875_21.png?raw=true" width="320">
+<br />
+<i>Process result with a reduction factor of 0.875 and 16 iterations on the left and 21 on the right</i>
+</p>
+<br />
+
+One can see how the effect of the reduction factor affects the results. In order to obtain the desired results, one has to play with the reduction factor _f_ and the number of iteration _r_ to obtain the appropriated balance according to the given scattered initial point set.
