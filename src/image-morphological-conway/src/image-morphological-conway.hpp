@@ -52,6 +52,7 @@
  */
 
     # include <iostream>
+    # include <cmath>
     # include <opencv2/opencv.hpp>
     # include <opencv2/highgui/highgui.hpp>
     # include <common-include.hpp>
@@ -84,7 +85,7 @@
     /*! \brief image transformation
      */
 
-    void im_morphological_conway_maxpool( cv::Mat & im_source, cv::Mat & im_reducted, unsigned int im_scale );
+    void im_morphological_conway_maxpool( cv::Mat & im_source, cv::Mat & im_reducted, double const im_factor );
 
     /*! \brief main function
      *

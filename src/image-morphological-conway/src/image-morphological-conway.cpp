@@ -95,8 +95,6 @@
             /* swap grid */
             im_prev = im_next.clone();
 
-            std::cerr << im_count << std::endl;
-
         }
 
         /* send resulting layer */
@@ -108,10 +106,10 @@
     source - image transformation
  */
 
-    void im_morphological_conway_maxpool( cv::Mat & im_source, cv::Mat & im_reducted, unsigned int im_scale ) {
+    void im_morphological_conway_maxpool( cv::Mat & im_source, cv::Mat & im_reducted, double const im_factor ) {
 
         /* allocate image */
-        im_reducted = cv::Mat::zeros( cv::Size( im_source.cols >> im_scale, im_source.rows >> im_scale ), CV_8UC1 );
+        im_reducted = cv::Mat::zeros( cv::Size( int(im_source.cols * im_factor), int(im_source.rows * im_factor) ), CV_8UC1 );
 
         /* parsing source image */
         for ( int im_x(0); im_x < im_source.cols; im_x ++ ) {
@@ -123,7 +121,7 @@
                 if ( im_source.at<uchar>(im_y, im_x) == 255 ) {
 
                     /* assign pixels on reduce image */
-                    im_reducted.at<uchar>(im_y >> im_scale, im_x >> im_scale) = 255;
+                    im_reducted.at<uchar>(int(im_y * im_factor), int(im_x * im_factor)) = 255;
 
                 }
 
@@ -145,14 +143,14 @@
         /* export image path */
         char * im_export_path( lc_read_string( argc, argv, "--export", "-e" ) );
 
+        /* reduction factor */
+        double im_factor( lc_read_double( argc, argv, "--factor", "-f", 0.5 ) );
+
         /* source image */
         cv::Mat im_source;
 
         /* reduced image */
         cv::Mat im_reducted;
-
-        /* exported image */
-        cv::Mat im_export;
 
         /* scale reduction depth */
         unsigned int im_reduce( lc_read_unsigned( argc, argv, "--reduction", "-r", 1 ) );
@@ -171,10 +169,7 @@
 
         }
 
-        /* allocate exported image */
-        im_export = cv::Mat::zeros( cv::Size( im_source.cols, im_source.rows ), CV_8UC1 );
-
-        /* parsing scale reduction */
+        /* parsing scales */
         for ( int im_scale( im_reduce ); im_scale >= 0; im_scale -- ) {
 
             /* check scale value */
@@ -186,7 +181,7 @@
             } else {
 
                 /* compute reduced image */
-                im_morphological_conway_maxpool( im_source, im_reducted, im_scale );
+                im_morphological_conway_maxpool( im_source, im_reducted, std::pow( im_factor, im_scale ) );
 
             }
 
@@ -216,6 +211,7 @@
 
     }
 
+        /* system code */
         return 0;
 
     }
