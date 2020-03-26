@@ -84,7 +84,7 @@
      *  of the provided pixel of the source image. It uses the provided kernel
      *  value to determine the size of the area around the pixel that is
      *  considered for the computation of the mean and standard deviation of the
-     *  pixel.
+     *  surrounding pixels.
      *
      *  The mask image is used to ignore pixels of the source image with value  
      *  below 127.5 in the corresponding mask image position. These pixels do
@@ -92,7 +92,7 @@
      *
      *  The \b im_channel is a vector that contain the index of the color
      *  component to consider for the computation of the mean and standard
-     *  deviation of the pixel. If \b 0 is provided as a single element of the
+     *  deviation of the pixels. If \b 0 is provided as a single element of the
      *  vector, only the first channel of the image is considered for the
      *  computation of the mean and standard deviation. If the vector contains
      *  two element \b 0 and \b 2, the red and blue channels are used to compute
@@ -119,17 +119,17 @@
      *  This function is a front-end for the computation of each pixel of the
      *  source image local histogram. The source image is assumed to be reduced
      *  in size. The mask is expected to have the same size of the provided
-     *  source image. The mask is broadcasted to the subsequent process that
-     *  performs the statistical quantities computation.
+     *  source image. The mask is broadcast to the subsequent process that
+     *  performs the statistical quantities computation for each pixel.
      *
      *  This function simply parses the source image pixels and invokes the
-     *  computation of the local histogram.
+     *  computation of the local histogram statistical quantities.
      *
      *  The \b im_channel and \b im_kernel are only broadcast to the local
      *  histogram computation function \b image_adaptative_histogram_kernel().
      *
      *  This function is also responsible of allocating the memory of the two
-     *  maps for mean and standard deviation computed for each pixels.
+     *  maps for mean and standard deviation.
      *
      *  \param im_src         Source image, assumed to be reduced
      *  \param im_msk         Mask image, identical size as source image
@@ -143,9 +143,9 @@
 
     /*! \brief main function
      *
-     *  Based on the provided mean and standard deviation map, giving each pixel
-     *  of the source image local histogram, this function perform the local
-     *  histogram correction.
+     *  Based on the provided mean and standard deviation maps, giving each
+     *  pixel of the source image local histogram statistical quantities, this
+     *  function perform the local histogram correction.
      *
      *  It uses the provided maps to cancel the source image local statistical
      *  quantities and to replace them by the provided target quantities. The
@@ -162,8 +162,8 @@
      *  correction is made for the two first components.
      *
      *  The mask image is used to ignore pixels during correction of the local
-     *  histogram. If the value of a pixel in the mask image is below 127.5, it
-     *  is ignored.
+     *  histogram. If the value of a pixel in the mask image is below 127.5, its
+     *  corresponding pixels on the source image is not corrected.
      *
      *  \param im_src         Source image, assumed to be at its original size
      *  \param im_msk         Mask image, identical size as source image
@@ -201,23 +201,29 @@
      *  size using a bicubic interpolation.
      *
      *  A mask image can be provided to the main function. If the pixel value of
-     *  the mask is above 127.5, the pixel is considered during the processing
-     *  and ignore otherwise.
+     *  the mask is above 127.5, the corresponding pixel of the source image is
+     *  considered during the processing and ignore otherwise.
      *
      *  The reduction of the source image is based on the provided reduction
      *  factor. The size of the reduce image is given be the original size of
      *  the source image times this reduction factor.
      *
+     *       reduced_size = original_size * reduce
+     *
      *  The size of each pixel surrounding area used to compute the statistical
      *  quantities, i.e. the local histogram, is given by the size of the
      *  reduced source image time the provided kernel factor. The higher the
      *  value is, the larger is the region used to compute pixels local
-     *  histogram (and the time needed to compute the correction maps).
+     *  histogram (and the time needed to compute the correction maps). The
+     *  kernel size in pixel according to the source image original size can
+     *  then be deduced from :
      *
-     *  The local histogram are computed based on a reduced version of the
+     *       kernel_size = original_size * reduce * kernel
+     *
+     *  The local histograms are computed based on a reduced version of the
      *  source image in order not to end up with very heavy process. It also
      *  allows to play with the reduction factor to adapt the correction to
-     *  specific feature scale.
+     *  specific features scale.
      *
      *  If the \b linked flag is provided, the correction is performed while
      *  keeping the color component group together. Otherwise, the correction
