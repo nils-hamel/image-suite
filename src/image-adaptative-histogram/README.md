@@ -10,9 +10,9 @@ Considering the case of the spherical camera, the following image gives an examp
 
 <br />
 <p align="center">
-<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-adaptative-histogram/doc/spherical-camera.jpg?raw=true" width="320">
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-adaptative-histogram/doc/spherical-camera.jpg?raw=true" width="384">
 &nbsp;
-<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-adaptative-histogram/doc/spherical-camera-mask.png?raw=true" width="320">
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-adaptative-histogram/doc/spherical-camera-mask.png?raw=true" width="384">
 <br />
 <i>Example of a spherical camera image and its corresponding mask</i>
 </p>
@@ -20,13 +20,16 @@ Considering the case of the spherical camera, the following image gives an examp
 
 Using the following command :
 
-    ./image-adaptative-histogram -s spherical-camera.jpg -m spherical-camera-mask.png -e spherical-camera-1.jpg -r 0.1 -k 0.065 -l -n 127.5 -d 64.0
+    ./image-adaptative-histogram -s spherical-camera.jpg 
+                                 -m spherical-camera-mask.png 
+                                 -e spherical-camera-1.jpg 
+                                 -r 0.1 -k 0.065 -l -n 127.5 -d 64.0
 
 one obtain the following result :
 
 <br />
 <p align="center">
-<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-adaptative-histogram/doc/spherical-camera-1.jpg?raw=true" width="320">
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-adaptative-histogram/doc/spherical-camera-1.jpg?raw=true" width="384">
 <br />
 <i>Result of the local histogram correction with color components linked</i>
 </p>
@@ -38,7 +41,7 @@ If the color component are not linked (missing --linked/-l), the correction is a
 
 <br />
 <p align="center">
-<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-adaptative-histogram/doc/spherical-camera-2.jpg?raw=true" width="320">
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-adaptative-histogram/doc/spherical-camera-2.jpg?raw=true" width="384">
 <br />
 <i>Result of the previous command without the color linkage flag (--linked/-l)</i>
 </p>
