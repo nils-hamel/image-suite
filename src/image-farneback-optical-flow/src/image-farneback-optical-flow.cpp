@@ -52,6 +52,9 @@
         char * im_img_a_path( lc_read_string( argc, argv, "--image-a", "-a" ) );
         char * im_img_b_path( lc_read_string( argc, argv, "--image-b", "-b" ) );
 
+        /* flow/map exportation path */
+        char * im_flow_path( lc_read_string( argc, argv, "--export", "-e" ) );
+
         /* source image */
         cv::Mat im_img_a;
         cv::Mat im_img_b;
@@ -71,6 +74,15 @@
 
         /* remapping exportation path */
         char * im_remap_path( lc_read_string( argc, argv, "--remap", "-r" ) );
+
+        /* pyramidal reduction factor */
+        double im_factor( lc_read_double( argc, argv, "--pyramid", "-p", 0.5 ) );
+
+        /* number of pyramidal level */
+        int im_pyramid(1);
+
+        /* window size */
+        unsigned int im_window( lc_read_unsigned( argc, argv, "--window", "-w", 8 ) );
 
     try
     {
@@ -102,14 +114,39 @@
         /* allocate flow matrix */
         im_flow = cv::Mat::zeros( im_img_a.size(), CV_32FC2 );
 
+        /* compute pyramidal level count */
+        im_pyramid = std::round( std::log( double(8) / std::max(im_img_a.cols,im_img_a.rows) ) / log( im_factor ) );
+
+        std::cerr << im_factor << " -> " << im_pyramid << std::endl;
+
         /* compute optical flow */
-        cv::calcOpticalFlowFarneback( im_img_a_g, im_img_b_g, im_flow, 0.5, 7, 8, 3, 5, 1.2, 0 );
+        cv::calcOpticalFlowFarneback( im_img_a_g, im_img_b_g, im_flow, im_factor, im_pyramid, im_window, 3, 5, 1.2, 0 );
 
         /* check exportation mode */
-        if ( lc_read_flag( argc, argv, "--export-map", "-m" ) == false ) {
+        if ( lc_read_flag( argc, argv, "--export-map", "-m" ) == true ) {
+
+            /* compute map */
+            im_farneback_optical_flow_map( im_flow );
+
+            /* create exportation file */
+            cv::FileStorage im_stream( im_flow_path, cv::FileStorage::WRITE );
 
             /* export flow */
-            //...
+            im_stream << "optical-flow-yx-remap" << im_flow;
+
+            /* delete stream */
+            im_stream.release();
+
+        } else {
+
+            /* create exportation file */
+            cv::FileStorage im_stream( im_flow_path, cv::FileStorage::WRITE );
+
+            /* export flow */
+            im_stream << "optical-flow-yx" << im_flow;
+
+            /* delete stream */
+            im_stream.release();
 
             /* check map computation requirement */
             if ( im_remap_path != NULL ) {
@@ -118,14 +155,6 @@
                 im_farneback_optical_flow_map( im_flow );
 
             }
-
-        } else {
-
-            /* compute map */
-            im_farneback_optical_flow_map( im_flow );
-
-            /* export map */
-            //...
 
         }
 
