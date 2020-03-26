@@ -20,6 +20,27 @@
 
     # include "image-farneback-optical-flow.hpp"
 
+/*
+    source - remapping
+ */
+
+    void im_farneback_optical_flow_map( cv::Mat & im_flow ) {
+
+        /* parsing flow */
+        for ( int im_x(0); im_x < im_flow.cols; im_x ++ ) {
+
+            /* parsing flow */
+            for ( int im_y(0); im_y < im_flow.rows; im_y ++ ) {
+
+                /* compute flow to map converion */
+                im_flow.at<cv::Vec2f>(im_y, im_x)[0] += im_x;
+                im_flow.at<cv::Vec2f>(im_y, im_x)[1] += im_y;           
+
+            }
+
+        }
+
+    }
 
 /*
     source - main function
@@ -27,50 +48,117 @@
 
     int main( int argc, char ** argv ) {
 
-        std::cout << "OpenCV version: "
-			<< CV_MAJOR_VERSION << "." 
-			<< CV_MINOR_VERSION << "."
-			<< CV_SUBMINOR_VERSION
-			<< std::endl;
+        /* source image path */
+        char * im_img_a_path( lc_read_string( argc, argv, "--image-a", "-a" ) );
+        char * im_img_b_path( lc_read_string( argc, argv, "--image-b", "-b" ) );
 
-        cv::Mat img1 = cv::imread(argv[1], cv::IMREAD_COLOR);
-        cv::Mat img2 = cv::imread(argv[2], cv::IMREAD_COLOR);
-        cv::Mat res(img1.size(), CV_32FC2);
+        /* source image */
+        cv::Mat im_img_a;
+        cv::Mat im_img_b;
 
-        if (img1.empty()){std::cerr << "error 1" << std::endl; return 1; }
-        if (img2.empty()){std::cerr << "error 2" << std::endl; return 1; }
+        /* grayscale image */
+        cv::Mat im_img_a_g;
+        cv::Mat im_img_b_g;
 
-        cv::Mat prev, next;
+        /* optical flow */
+        cv::Mat im_flow;
 
-        cv::cvtColor(img1, prev, cv::COLOR_BGR2GRAY);
-        cv::cvtColor(img2, next, cv::COLOR_BGR2GRAY);
+        /* remapping image */
+        cv::Mat im_remap;
 
-        //cv::calcOpticalFlowFarneback(prev,next,res, 0.5, 5, 4, 3, 5, 1.2, 0);
-        cv::calcOpticalFlowFarneback(prev,next,res, 0.5, 7, 8, 3, 5, 1.2, 0 );
+        /* flow component */
+        cv::Mat im_fcomp[2];
 
-        // C++: void calcOpticalFlowFarneback
-        //(InputArray prev, InputArray next, InputOutputArray flow, double pyr_scale, int levels, int winsize, int iterations, int poly_n, double poly_sigma, int flags)
+        /* remapping exportation path */
+        char * im_remap_path( lc_read_string( argc, argv, "--remap", "-r" ) );
 
-        std::cerr << "debug a" << std::endl;
+    try
+    {
 
-        for ( int x(0); x < res.cols; x ++ ) {
-            for ( int y(0); y < res.rows; y ++ ) {
-                res.at<cv::Vec2f>(y,x)[0] += x;
-                res.at<cv::Vec2f>(y,x)[1] += y;
-            }
+        /* read source image */
+        im_img_a = cv::imread( im_img_a_path, cv::IMREAD_COLOR );
+        im_img_b = cv::imread( im_img_b_path, cv::IMREAD_COLOR );
+
+        /* check source image */
+        if ( im_img_a.empty() ) {
+
+            /* send message */
+            throw std::runtime_error( "Unable to import source image a" );
+
         }
 
-        std::cerr << "debug b" << std::endl;
+        /* check source image */
+        if ( im_img_b.empty() ) {
 
-        cv::Mat comp[2];
-        cv::split(res,comp);
+            /* send message */
+            throw std::runtime_error( "Unable to import source image b" );
 
-        cv::Mat img3(img1.size(), CV_8UC3 );
+        }
 
-        cv::remap( img2, img3, comp[0], comp[1], cv::INTER_LINEAR, cv::BORDER_CONSTANT, cv::Scalar(0, 0, 0) );
+        /* convert source image */
+        cv::cvtColor( im_img_a, im_img_a_g, cv::COLOR_BGR2GRAY );
+        cv::cvtColor( im_img_b, im_img_b_g, cv::COLOR_BGR2GRAY );
 
-        cv::imwrite( argv[3], img3 );
+        /* allocate flow matrix */
+        im_flow = cv::Mat::zeros( im_img_a.size(), CV_32FC2 );
 
+        /* compute optical flow */
+        cv::calcOpticalFlowFarneback( im_img_a_g, im_img_b_g, im_flow, 0.5, 7, 8, 3, 5, 1.2, 0 );
+
+        /* check exportation mode */
+        if ( lc_read_flag( argc, argv, "--export-map", "-m" ) == false ) {
+
+            /* export flow */
+            //...
+
+            /* check map computation requirement */
+            if ( im_remap_path != NULL ) {
+
+                /* compute map */
+                im_farneback_optical_flow_map( im_flow );
+
+            }
+
+        } else {
+
+            /* compute map */
+            im_farneback_optical_flow_map( im_flow );
+
+            /* export map */
+            //...
+
+        }
+
+        /* check remapping exportation */
+        if ( im_remap_path != NULL ) {
+
+            /* allocate remap image */
+            im_remap = cv::Mat::zeros( im_img_a.size(), CV_8UC3 );
+
+            /* decompose map */
+            cv::split( im_flow, im_fcomp );
+
+            /* compute remapping */
+            cv::remap( im_img_b, im_remap, im_fcomp[0], im_fcomp[1], cv::INTER_CUBIC, cv::BORDER_CONSTANT, cv::Scalar(0, 0, 0) );
+
+            /* export remap */
+            cv::imwrite( im_remap_path, im_remap );
+
+        }
+
+    }
+    catch( std::runtime_error & im_error )
+    {
+
+        /* display runtime error message */
+        std::cerr << "Error : " << im_error.what() << std::endl;
+
+        /* system code */
+        return 1;
+
+    }
+
+        /* system code */
         return 0;
 
     }

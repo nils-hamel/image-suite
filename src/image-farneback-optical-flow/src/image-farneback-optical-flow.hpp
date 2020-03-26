@@ -75,6 +75,11 @@
     header - function prototypes
  */
 
+    /*! \brief main function
+     *
+     */
+
+    void im_farneback_optical_flow_map( cv::Mat & im_flow );
 
     /*! \brief main function
      *
