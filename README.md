@@ -8,7 +8,7 @@ These methods originates from different research field problems and aim to provi
 
 Each implemented tool come with its own documentation that explains the implemented solution and gives example of usage and results. The following sections give access to these documentations.
 
-_Morphological Operator_
+_Morphological Operators_
 
 [Conway-based region filling of scattered pixels](src/image-morphological-conway/README.md)
 
