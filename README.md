@@ -30,7 +30,10 @@ This program is licensed under the terms of the GNU GPLv3. Documentation and ill
 The image-suite comes with the following package dependencies (Ubuntu 16.04 LTS) :
 
 * build-essential
-* libopencv-dev
+
+and the following external dependencies :
+
+ * opencv 4.0.1 ([Instructions](EXTERNAL.md))
 
 The code documentation is built using Doxygen.
 
