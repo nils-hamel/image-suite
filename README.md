@@ -1,6 +1,18 @@
 ## Overview
 
-This tools suite implements specific image processing methods that are often missing from image libraries and softwares.
+This tools suite implements very specific image processing methods that are often missing from image processing libraries and softwares. The goal is to offer simple tools that allows to access to these methods and use them on images mainly in the research domain.
+
+These methods originates from different research field problems and aim to provide possible solutions through easy to use softwares (that remain in command line).
+
+## Documentation and Usage
+
+Each implemented tool come with its own documentation that explains the implemented solution and gives example of usage and results. The following sections give access to these documentations.
+
+_Morphological Operator_
+
+[Conway-based region filling of scattered pixels](src/image-morphological-conway/README.md)
+
+In addition, codes come with _doxygen_ documentation that goes in the detail of each aspects of the implemented methods.
 
 ## Copyright and License
 
