@@ -18,7 +18,7 @@ To illustrate the tools result, the following example image is considered :
 
 To apply the region filling on the image, one uses the following command :
 
-    ./image-morphological-conway -s example.png -e result_0.5_1.png -r 1 -f 0.5
+    ./image-morphological-conway -s example.png -e result_0.5_1.png -r 4 -f 0.5
 
 The reduction factor _r_ gives the amount of scale to consider for the process while the factor _f_ gives the scales reduction value that has to be between _0_ and _1_. See the tool doxygen documentation for more details.
 
@@ -30,7 +30,7 @@ The following image shows the results obtained used _f=0.5_ and with a varying n
 &nbsp;
 <img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.5_2.png?raw=true" width="320">
 <br />
-<i>Process result with a reduction factor of 0.5 and 1 iteration on the left and 2 on the right</i>
+<i>Process result with a reduction factor of 0.5 and 1 scale on the left and 2 on the right</i>
 </p>
 <br />
 
@@ -66,7 +66,7 @@ The following images gives the results obtained with _f=0.75_ and a number of it
 &nbsp;
 <img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.75_5.png?raw=true" width="320">
 <br />
-<i>Process result with a reduction factor of 0.75 and 2 iterations on the left and 5 on the right</i>
+<i>Process result with a reduction factor of 0.75 and 2 scales on the left and 5 on the right</i>
 </p>
 <br />
 
@@ -76,7 +76,7 @@ The following images gives the results obtained with _f=0.75_ and a number of it
 &nbsp;
 <img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.75_10.png?raw=true" width="320">
 <br />
-<i>Process result with a reduction factor of 0.75 and 7 iterations on the left and 10 on the right</i>
+<i>Process result with a reduction factor of 0.75 and 7 scales on the left and 10 on the right</i>
 </p>
 <br />
 
@@ -90,7 +90,7 @@ The following images show the results obtained with _f=0.875_ and a number of it
 &nbsp;
 <img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.875_10.png?raw=true" width="320">
 <br />
-<i>Process result with a reduction factor of 0.875 and 5 iterations on the left and 10 on the right</i>
+<i>Process result with a reduction factor of 0.875 and 5 scales on the left and 10 on the right</i>
 </p>
 <br />
 
@@ -100,7 +100,7 @@ The following images show the results obtained with _f=0.875_ and a number of it
 &nbsp;
 <img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-morphological-conway/doc/result_0.875_21.png?raw=true" width="320">
 <br />
-<i>Process result with a reduction factor of 0.875 and 16 iterations on the left and 21 on the right</i>
+<i>Process result with a reduction factor of 0.875 and 16 scales on the left and 21 on the right</i>
 </p>
 <br />
 
