@@ -78,7 +78,12 @@
         cv::inpaint( im_source, im_mask, im_export, im_kernel, cv::INPAINT_TELEA );
 
         /* export completed image */
-        cv::imwrite( lc_read_string( argc, argv, "--export", "-e" ), im_export );
+        if ( cv::imwrite( lc_read_string( argc, argv, "--export", "-e" ), im_export ) == false ) {
+
+            /* send message */
+            throw std::runtime_error( "Image exportation failed" );
+
+        }
 
     }
     catch( std::runtime_error & im_error)

@@ -92,6 +92,9 @@
      *  only black and white pixels. The black pixels corresponds to the pixels
      *  to extrapolate.
      *
+     *  The inpaint function is called using the INPAINT_TELEA (A. Telea) method
+     *  to compute and assign the missing pixels.
+     *
      *  The resulting image is exported by the main function using the provided
      *  exportation path.
      *
