@@ -2,7 +2,7 @@
  *  image-suite - morphological conway
  *
  *      Nils Hamel - nils.hamel@bluewin.ch
- *      Copyright (c) 2016-2020 DHLAB, EPFL
+ *      Copyright (c) 2020 DHLAB, EPFL
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@
      *  \section copyright Copyright and License
      *
      *  **image-suite** - Nils Hamel <br >
-     *  Copyright (c) 2016-2020 DHLAB, EPFL
+     *  Copyright (c) 2020 DHLAB, EPFL
      *
      *  This program is licensed under the terms of the GNU GPLv3.
      */
@@ -51,10 +51,7 @@
     header - external includes
  */
 
-    # include <iostream>
-    # include <cmath>
     # include <opencv2/opencv.hpp>
-    # include <opencv2/highgui/highgui.hpp>
     # include <common-include.hpp>
 
 /*
@@ -77,7 +74,7 @@
     header - function prototypes
  */
 
-    /*! \brief image transformation
+    /*! \brief morphological filler
      *
      *  This function applies a variation of the Conway game on the source
      *  image. The process is iterative and stops as no pixel can be activated

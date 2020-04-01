@@ -2,7 +2,7 @@
  *  image-suite - adaptative histogram
  *
  *      Nils Hamel - nils.hamel@bluewin.ch
- *      Copyright (c) 2016-2020 DHLAB, EPFL
+ *      Copyright (c) 2020 DHLAB, EPFL
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
     # include "image-adaptative-histogram.hpp"
 
 /*
-    source - adaptative histogram computation
+    source - adaptative histogram - compute
  */
 
     void image_adaptative_histogram_kernel( cv::Mat & im_src, cv::Mat & im_msk, cv::Mat & im_mean, cv::Mat & im_std, std::vector<int> & im_channels, int const im_kernel, int const im_px, int const im_py ) {
@@ -53,7 +53,7 @@
             for ( int im_y(im_y_l); im_y < im_y_h; im_y ++ ) {
 
                 /* check mask condition */
-                if ( im_msk.at<uchar>(im_y, im_x) > 127.5 ) {
+                if ( im_msk.at<uchar>(im_y, im_x) > 127 ) {
 
                     /* parsing channels */
                     for ( unsigned int im_c(0); im_c < im_channels.size(); im_c ++ ) {
@@ -90,7 +90,7 @@
             for ( int im_y(im_y_l); im_y < im_y_h; im_y ++ ) {
 
                 /* check mask condition */
-                if ( im_msk.at<uchar>(im_y, im_x) > 127.5 ) {
+                if ( im_msk.at<uchar>(im_y, im_x) > 127 ) {
 
                     /* parsing channel */
                     for( unsigned int im_c(0); im_c < im_channels.size(); im_c ++ ) {
@@ -138,7 +138,7 @@
     }
 
 /*
-    source - adaptative histogram application
+    source - adaptative histogram - apply
  */
 
     void image_adaptative_histogram_apply( cv::Mat & im_src, cv::Mat & im_msk, cv::Mat & im_mean, cv::Mat & im_std, std::vector<int> & im_channels, double const im_target_mean, double const im_target_std ) {
@@ -153,7 +153,7 @@
             for ( int im_y(0); im_y < im_src.rows; im_y ++ ) {
 
                 /* check mask condition */
-                if ( im_msk.at<uchar>(im_y, im_x) > 127.5 ) {
+                if ( im_msk.at<uchar>(im_y, im_x) > 127 ) {
 
                     /* parsing channels */
                     for ( unsigned int im_c(0); im_c < im_channels.size(); im_c ++ ) {
@@ -337,7 +337,12 @@
         }
 
         /* export image */
-        cv::imwrite( lc_read_string( argc, argv, "--export", "-e" ), im_src );
+        if ( cv::imwrite( lc_read_string( argc, argv, "--export", "-e" ), im_src ) == false ) {
+
+            /* send message */
+            throw std::runtime_error( "Image exportation failed" );
+
+        }
         
     }
     catch( std::runtime_error & im_error)

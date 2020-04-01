@@ -2,7 +2,7 @@
  *  image-suite - morphological conway
  *
  *      Nils Hamel - nils.hamel@bluewin.ch
- *      Copyright (c) 2016-2020 DHLAB, EPFL
+ *      Copyright (c) 2020 DHLAB, EPFL
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
     # include "image-morphological-conway.hpp"
 
 /*
-    source - Conway game variation
+    source - morphological filler
  */
 
     void im_morphological_conway( cv::Mat & im_image ) {
@@ -197,7 +197,12 @@
         }
 
         /* export resulting image */
-        cv::imwrite( im_export_path, im_source );
+        if ( cv::imwrite( im_export_path, im_source ) == false ) {
+
+            /* send message */
+            throw std::runtime_error( "Image exportation failed" );
+
+        }
 
     }
     catch( std::runtime_error & im_error )

@@ -2,7 +2,7 @@
  *  image-suite - farneback optical flow
  *
  *      Nils Hamel - nils.hamel@bluewin.ch
- *      Copyright (c) 2016-2020 DHLAB, EPFL
+ *      Copyright (c) 2020 DHLAB, EPFL
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
     # include "image-farneback-optical-flow.hpp"
 
 /*
-    source - remapping
+    source - image remapping
  */
 
     void im_farneback_optical_flow_map( cv::Mat & im_flow ) {
@@ -171,7 +171,12 @@
             cv::remap( im_img_b, im_remap, im_fcomp[0], im_fcomp[1], cv::INTER_CUBIC, cv::BORDER_CONSTANT, cv::Scalar(0, 0, 0) );
 
             /* export remap */
-            cv::imwrite( im_remap_path, im_remap );
+            if ( cv::imwrite( im_remap_path, im_remap ) == false ) {
+
+                /* send message */
+                throw std::runtime_error( "Image exportation failed" );
+
+            }
 
         }
 

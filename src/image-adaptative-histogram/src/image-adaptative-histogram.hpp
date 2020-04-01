@@ -2,7 +2,7 @@
  *  image-suite - adaptative histogram
  *
  *      Nils Hamel - nils.hamel@bluewin.ch
- *      Copyright (c) 2016-2020 DHLAB, EPFL
+ *      Copyright (c) 2020 DHLAB, EPFL
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@
      *  \section copyright Copyright and License
      *
      *  **image-suite** - Nils Hamel <br >
-     *  Copyright (c) 2016-2020 DHLAB, EPFL
+     *  Copyright (c) 2020 DHLAB, EPFL
      *
      *  This program is licensed under the terms of the GNU GPLv3.
      */
@@ -51,10 +51,6 @@
     header - external includes
  */
 
-    # include <iostream>
-    # include <vector>
-    # include <cstdlib>
-    # include <cmath>
     # include <opencv2/opencv.hpp>
     # include <common-include.hpp>
 
@@ -78,7 +74,7 @@
     header - function prototypes
  */
 
-    /*! \brief main function
+    /*! \brief adaptative histogram - compute
      *
      *  This function is responsible for the computation of the local histogram
      *  of the provided pixel of the source image. It uses the provided kernel
@@ -114,7 +110,7 @@
 
     void image_adaptative_histogram_kernel( cv::Mat & im_src, cv::Mat & im_msk, cv::Mat & im_mean, cv::Mat & im_std, std::vector<int> & im_channels, int const im_kernel, int const im_px, int const im_py );
 
-    /*! \brief main function
+    /*! \brief adaptative histogram - compute
      *
      *  This function is a front-end for the computation of each pixel of the
      *  source image local histogram. The source image is assumed to be reduced
@@ -141,7 +137,7 @@
 
     void image_adaptative_histogram( cv::Mat & im_src, cv::Mat & im_msk, cv::Mat & im_mean, cv::Mat & im_std, std::vector<int> & im_channels, int const im_kernel );
 
-    /*! \brief main function
+    /*! \brief adaptative histogram - apply
      *
      *  Based on the provided mean and standard deviation maps, giving each
      *  pixel of the source image local histogram statistical quantities, this
