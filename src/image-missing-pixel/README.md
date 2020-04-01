@@ -29,7 +29,7 @@ one obtain the following result :
 
 <br />
 <p align="center">
-<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-adaptative-histogram/doc/spherical-camera-filled.jpg?raw=true" width="384">
+<img src="https://github.com/nils-hamel/image-suite/blob/master/src/image-missing-pixel/doc/spherical-camera-filled.jpg?raw=true" width="384">
 <br />
 <i>Result of the selected pixel extrapolation</i>
 </p>

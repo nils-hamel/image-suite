@@ -16,6 +16,10 @@ _Morphological Operators_
 
 [Conway-based region filling of scattered pixels](src/image-morphological-conway/README.md)
 
+_Images completion_
+
+[Missing pixels extrapolation](src/image-missing-pixel/README.md)
+
 In addition, codes come with _doxygen_ documentation that goes in the detail of each aspects of the implemented methods.
 
 ## Copyright and License
