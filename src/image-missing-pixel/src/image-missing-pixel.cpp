@@ -35,9 +35,6 @@
         /* Mask image */
         cv::Mat im_mask;
 
-        /* Filling map */
-        cv::Mat im_fill;
-
         /* export image */
         cv::Mat im_export;
 

@@ -54,9 +54,6 @@
     # include <iostream>
     # include <cstdlib>
     # include <cmath>
-
-    # include <string>
-
     # include <opencv2/opencv.hpp>
     # include <common-include.hpp>
 
@@ -82,6 +79,23 @@
 
     /*! \brief main function
      *
+     *  The main function implements a simple front-end to the OpenCV inpaint
+     *  missing pixel completion :
+     *
+     *      ./image-missing-pixel --source/-s [source image path]
+     *                            --mask/-m [mask image path]
+     *                            --export/-e [exported image path]
+     *                            --kernel/-k [inpaint radius value]
+     *
+     *  The main function starts by importing the source image and the mask
+     *  image. The mask image is expected to be a grayscale image containing
+     *  only black and white pixels. The black pixels corresponds to the pixels
+     *  to extrapolate.
+     *
+     *  The resulting image is exported by the main function using the provided
+     *  exportation path.
+     *
+     *  See more information on inpaint function in the OpenCV documentation.
      *
      *  \param argc Standard parameter
      *  \param argv Standard parameter
