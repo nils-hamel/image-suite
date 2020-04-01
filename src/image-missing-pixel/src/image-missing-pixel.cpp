@@ -27,7 +27,7 @@
     int main( int argc, char ** argv ) {
 
         /* kernel sampling width */
-        int im_kernel( lc_read_signed( argc, argv, "--kernel", "-k", 64 ) );
+        int im_kernel( lc_read_signed( argc, argv, "--kernel", "-k", 8 ) );
 
         /* Source image */
         cv::Mat im_source;
