@@ -4,7 +4,7 @@ This tool implement a simple front-end to the _OpenCV_ _inpaint_ method that all
 
 The missing pixels are specified through a mask image that comes with the same size as the image to process but containing black values on the pixels to extrapolate and white value on the pixels to keep and use for extrapolation.
 
-## Usage example
+## Usage
 
 Considering the following panoramic image acquired with a spherical camera, one can see that part of the camera and the vehicle on which it is mounted can be seen on the image. The following image shows the raw panoramic image and its corresponding mask that points to the pixels belonging to the camera and vehicle :
 

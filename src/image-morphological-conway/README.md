@@ -4,7 +4,7 @@ This tool transforms a raster containing scattered white pixels into a raster on
 
 This tools originated from the _structure-from-motion_ field where sparse keypoints of an 3D objects appears as a set of scattered points when reprojected on images that see the objects. The objective of this tool was to have a way of extrapolating the area covered by an object on an image based on the few reporjected keypoints coming from it.
 
-## Usage example
+## Usage
 
 To illustrate the tools usage and results, the following example image is considered :
 

@@ -4,7 +4,7 @@ This tool allows to compute an _adaptative_ histogram correction on a given imag
 
 This tool was designed in the context of city digitization using a spherical camera. As a spherical camera capture full panoramic images, it is able to see everything surrounding it. With good weather, traveling in a street with such camera produces images seeing half buildings exposed to the sun while the other half are seen in their own shade. This tool was designed to correct this effect by normalizing the exposure helping subsequent process that use these images such as _structure from motion_ or _optical flow_.
 
-## Usage example
+## Usage
 
 Considering the case of the spherical camera images, the following picture gives an example of a capture in the streets of a city. As the camera see part of itself and the car on which it is attached, a mask is also considered for this example.
 
