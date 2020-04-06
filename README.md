@@ -4,9 +4,9 @@ This tools suite implements very specific image processing methods that are ofte
 
 These methods originates from different research field problems and aim to provide possible solutions through easy to use softwares (that remain in command line).
 
-## Documentation and Usage
+## Image-Suite
 
-Each implemented tool come with its own documentation that explains the implemented solution and gives example of usage and results. The following sections give access to these documentations.
+Each implemented tool come with its own documentation that explains the implemented solution and gives example of usage and results :
 
 _Histogram and exposure correction_
 
@@ -31,13 +31,13 @@ This program is licensed under the terms of the GNU GPLv3. Documentation and ill
 
 ## Dependencies
 
-The image-suite comes with the following package dependencies (Ubuntu 16.04 LTS) :
+The image-suite comes with the following package dependencies ([Instructions](DEPEND.md)) :
 
 * build-essential
 
-and the following external dependencies :
+and the following external dependencies ([Instructions](DEPEND.md)) :
 
- * opencv 4.0.1 ([Instructions](EXTERNAL.md))
+ * opencv 4.0.1
 
 The code documentation is built using Doxygen.
 

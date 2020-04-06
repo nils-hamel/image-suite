@@ -1,12 +1,20 @@
-## External dependencies installation
+## Packages and external dependencies installation
 
-The following section gives the installation instruction for the external dependencies for the supported platforms.
+The following sections give the installation instructions for the required distribution packages and external dependencies for the supported platforms.
+
+## Required distribution packages
+
+### Ubuntu 16.04 LTS
+
+```
+sudo apt-get install build-essential
+```
 
 ## OpenCV 4.0.1
 
 ### Ubuntu 16.04 LTS
 
-This procedure creates a _Build_ directory in the user home directory to perform the compilation.
+This procedure creates a _Build_ directory in the user home directory to perform the compilation. It can be removed after installation.
 
 ```
 mkdir ~/Build
