@@ -28,12 +28,22 @@
      *
      *  \section overview Overview
      *
+     *  This tools suite implements very specific image processing methods that
+     *  are often missing from image processing libraries and softwares. The
+     *  goal is to offer simple tools that allows to access to these methods and
+     *  use them on images mainly in the research domain.
+     *
+     *  These methods originates from different research field problems and aim
+     *  to provide possible solutions through easy to use softwares (that remain
+     *  in command line).
+     *
      *  \section copyright Copyright and License
      *
      *  **image-suite** - Nils Hamel <br >
      *  Copyright (c) 2020 DHLAB, EPFL
      *
-     *  This program is licensed under the terms of the GNU GPLv3.
+     *  This program is licensed under the terms of the GNU GPLv3. Documentation
+     *  and illustrations are licensed under the terms of the CC BY 4.0.
      */
 
 /*
