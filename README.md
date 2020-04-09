@@ -6,19 +6,19 @@ These methods originates from different research field problems and aim to provi
 
 ## Image-Suite
 
-Each implemented tool come with its own documentation that explains the implemented solution and gives example of usage and results :
+Each implemented tool comes with its own documentation that explains the implemented solution and gives examples of usages and results :
 
 _Histogram and exposure correction_
 
-[Local histogram computation and correction](src/image-adaptative-histogram/README.md)
+* [Local histogram computation and correction](src/image-adaptative-histogram)
 
 _Morphological Operators_
 
-[Conway-based region filling of scattered pixels](src/image-morphological-conway/README.md)
+* [Conway-based region filling of scattered pixels](src/image-morphological-conway)
 
 _Images completion_
 
-[Missing pixels extrapolation](src/image-missing-pixel/README.md)
+* [Missing pixels extrapolation](src/image-missing-pixel)
 
 In addition, codes come with _doxygen_ documentation that goes in the detail of each aspects of the implemented methods.
 
