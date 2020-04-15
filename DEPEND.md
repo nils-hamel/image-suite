@@ -7,7 +7,7 @@ The following sections give the installation instructions for the required distr
 ### Ubuntu 16.04 LTS
 
 ```
-sudo apt-get install build-essential
+sudo apt-get install build-essential doxygen
 ```
 
 ## OpenCV 4.0.1
