@@ -32,7 +32,7 @@
             /* parsing flow */
             for ( int im_y(0); im_y < im_flow.rows; im_y ++ ) {
 
-                /* compute flow to map converion */
+                /* compute flow to map conversion */
                 im_flow.at<cv::Vec2f>(im_y, im_x)[0] += im_x;
                 im_flow.at<cv::Vec2f>(im_y, im_x)[1] += im_y;           
 
@@ -59,7 +59,7 @@
         cv::Mat im_img_a;
         cv::Mat im_img_b;
 
-        /* grayscale image */
+        /* greyscale image */
         cv::Mat im_img_a_g;
         cv::Mat im_img_b_g;
 
@@ -116,8 +116,6 @@
 
         /* compute pyramidal level count */
         im_pyramid = std::round( std::log( double(8) / std::max(im_img_a.cols,im_img_a.rows) ) / log( im_factor ) );
-
-        std::cerr << im_factor << " -> " << im_pyramid << std::endl;
 
         /* compute optical flow */
         cv::calcOpticalFlowFarneback( im_img_a_g, im_img_b_g, im_flow, im_factor, im_pyramid, im_window, 3, 5, 1.2, 0 );

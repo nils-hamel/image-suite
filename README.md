@@ -4,7 +4,7 @@ This tools suite implements very specific image processing methods that are ofte
 
 These methods originates from different research field problems and aim to provide possible solutions through easy to use softwares (that remain in command line).
 
-## Image-Suite
+## image-Suite
 
 Each implemented tool comes with its own documentation that explains the implemented solution and gives examples of usages and results :
 
