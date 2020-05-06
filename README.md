@@ -20,6 +20,10 @@ _Images completion_
 
 * [Missing pixels extrapolation](src/image-missing-pixel)
 
+_Dense matching and optical flow_
+
+* [Farneback optical flow](src/image-farneback-optical-flow)
+
 In addition, codes come with _doxygen_ documentation that goes in the detail of each aspects of the implemented methods.
 
 ## Copyright and License
