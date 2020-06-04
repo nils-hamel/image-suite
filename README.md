@@ -6,7 +6,7 @@ These methods originates from different research field problems and aim to provi
 
 ## image-suite
 
-Each implemented tool comes with its own documentation that explains the implemented solution and gives examples of usages and results :
+Each implemented tool of the suite comes with its own documentation that explains the implemented solution and gives examples of usages and results :
 
 _Histogram and exposure correction_
 
