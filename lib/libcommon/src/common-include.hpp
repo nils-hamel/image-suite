@@ -2,7 +2,7 @@
  *  image-suite - common library
  *
  *      Nils Hamel - nils.hamel@bluewin.ch
- *      Copyright (c) 2016-2020 DHLAB, EPFL
+ *      Copyright (c) 2020 DHLAB, EPFL
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,19 +21,18 @@
     /*! \file   common-include.hpp
      *  \author Nils Hamel <nils.hamel@bluewin.ch>
      *
-     *  image-suite - common library - inclusion module
+     *  image-suite - common library - inclusion
      */
 
     /*! \mainpage image-suite
      *
-     *  \section overview Overview
-     *
      *  \section copyright Copyright and License
      *
      *  **image-suite** - Nils Hamel <br >
-     *  Copyright (c) 2016-2020 DHLAB, EPFL
+     *  Copyright (c) 2020 DHLAB, EPFL
      *
-     *  This program is licensed under the terms of the GNU GPLv3.
+     *  This program is licensed under the terms of the GNU GPLv3. Documentation
+     *  and illustrations are licensed under the terms of the CC BY 4.0.
      */
 
 /*

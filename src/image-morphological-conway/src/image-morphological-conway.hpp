@@ -26,17 +26,6 @@
 
     /*! \mainpage image-suite
      *
-     *  \section overview Overview
-     *
-     *  This tools suite implements very specific image processing methods that
-     *  are often missing from image processing libraries and softwares. The
-     *  goal is to offer simple tools that allows to access to these methods and
-     *  use them on images mainly in the research domain.
-     *
-     *  These methods originates from different research field problems and aim
-     *  to provide possible solutions through easy to use softwares (that remain
-     *  in command line).
-     *
      *  \section copyright Copyright and License
      *
      *  **image-suite** - Nils Hamel <br >
